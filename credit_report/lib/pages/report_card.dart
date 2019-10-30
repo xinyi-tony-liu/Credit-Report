@@ -1,4 +1,5 @@
 import 'package:credit_report/pages/article_feed.dart';
+import 'package:credit_report/pages/cards.dart';
 import 'package:credit_report/pages/detailed_report.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +83,7 @@ class _ReportCardState extends State<ReportCardPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ArticleFeedPage()));
+                              builder: (context) => CardsPage()));
                     },
                   ),
                 ],
