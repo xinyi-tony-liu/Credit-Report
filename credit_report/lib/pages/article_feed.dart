@@ -69,36 +69,41 @@ class _ArticleFeedState extends State<ArticleFeedPage> {
               height: 60,
             ),
             ArticleFeedEntry(
-              label: "Payment History",
-              picture: "",
+              label: "Site A Title",
+              picture: "unavailable.jpg",
+              summary: "This is site A",
             ),
             SizedBox(
               height: 15,
             ),
             ArticleFeedEntry(
-              label: "Credit Limit Utilization",
-              score: 840,
+              label: "Site B Title",
+              picture: "unavailable.jpg",
+              summary: "This is site B",
             ),
             SizedBox(
               height: 15,
             ),
             ArticleFeedEntry(
-              label: "Length of Debt",
-              score: 790,
+              label: "Site C Title",
+              picture: "unavailable.jpg",
+              summary: "This is site C",
             ),
             SizedBox(
               height: 15,
             ),
             ArticleFeedEntry(
-              label: "Value of Debt",
-              score: 750,
+              label: "Site D Title",
+              picture: "unavailable.jpg",
+              summary: "This is site D",
             ),
             SizedBox(
               height: 15,
             ),
             ArticleFeedEntry(
-              label: "Credit Entries",
-              score: 700,
+              label: "Site E Title",
+              picture: "unavailable.jpg",
+              summary: "This is site E",
             ),
           ],
         ),
