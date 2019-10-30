@@ -1,6 +1,36 @@
 import 'package:credit_report/pages/article_feed.dart';
+import 'package:credit_report/pages/detailed_report.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+String toLetter(int score) {
+  String r = '';
+  int remainder;
+  List<int> scale = [800, 740, 670, 580];
+  if (score > scale[0]) {
+    r = r + 'A';
+    remainder = score - scale[0];
+  } else if (score > scale[1]) {
+    r = r + 'B';
+    remainder = score - scale[1];
+  } else if (score > scale[2]) {
+    r = r + 'C';
+    remainder = score - scale[2];
+  } else if (score > scale[3]) {
+    r = r + 'D';
+    remainder = score - scale[3];
+  } else {
+    return 'F';
+  }
+  if (remainder > 30) {
+    r = r + '+';
+  } else if (remainder < 15) {
+    r = r + '-';
+  } else {
+    r = r + ' ';
+  }
+  return r;
+}
 
 class ReportCardPage extends StatefulWidget {
   ReportCardPage({Key key}) : super(key: key);
@@ -10,6 +40,23 @@ class ReportCardPage extends StatefulWidget {
 }
 
 class _ReportCardState extends State<ReportCardPage> {
+  List<String> reportCategory = [
+    "Payment History",
+    "Credit Limit Utilization",
+    "Length of Debt",
+    "Value of Debt",
+    "Credit Entries",
+  ];
+
+// THIS IS TEMP
+  List<int> reportValues = [
+    730,
+    840,
+    790,
+    750,
+    700,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +74,10 @@ class _ReportCardState extends State<ReportCardPage> {
               Row(
                 children: <Widget>[
                   CupertinoButton(
-                    child: Text("next", style: TextStyle(color: Colors.white),),
+                    child: Text(
+                      "next",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -54,7 +104,7 @@ class _ReportCardState extends State<ReportCardPage> {
                   child: Text(
                     "Your overall grade",
                     style: TextStyle(
-                        color: Theme.of(context).primaryColor, fontSize: 40),
+                        color: Theme.of(context).primaryColor, fontSize: 37),
                   ),
                 ),
                 Container(
@@ -87,39 +137,99 @@ class _ReportCardState extends State<ReportCardPage> {
               ],
             ),
             SizedBox(
-              height: 60,
+              height: 40,
             ),
             ReportCardEntry(
-              label: "Payment History",
-              score: 730,
+              label: reportCategory[0],
+              score: reportValues[0],
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailedReportPage(
+                      title: reportCategory[0],
+                      score: reportValues[0],
+                      grade: toLetter(reportValues[0]),
+                    ),
+                  ),
+                );
+              },
             ),
             SizedBox(
               height: 15,
             ),
             ReportCardEntry(
-              label: "Credit Limit Utilization",
-              score: 840,
+              label: reportCategory[1],
+              score: reportValues[1],
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailedReportPage(
+                      title: reportCategory[1],
+                      score: reportValues[1],
+                      grade: toLetter(reportValues[1]),
+                    ),
+                  ),
+                );
+              },
             ),
             SizedBox(
               height: 15,
             ),
             ReportCardEntry(
-              label: "Length of Debt",
-              score: 790,
+              label: reportCategory[2],
+              score: reportValues[2],
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailedReportPage(
+                      title: reportCategory[2],
+                      score: reportValues[2],
+                      grade: toLetter(reportValues[2]),
+                    ),
+                  ),
+                );
+              },
             ),
             SizedBox(
               height: 15,
             ),
             ReportCardEntry(
-              label: "Value of Debt",
-              score: 750,
+              label: reportCategory[3],
+              score: reportValues[3],
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailedReportPage(
+                      title: reportCategory[3],
+                      score: reportValues[3],
+                      grade: toLetter(reportValues[3]),
+                    ),
+                  ),
+                );
+              },
             ),
             SizedBox(
               height: 15,
             ),
             ReportCardEntry(
-              label: "Credit Entries",
-              score: 700,
+              label: reportCategory[4],
+              score: reportValues[4],
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetailedReportPage(
+                      title: reportCategory[4],
+                      score: reportValues[4],
+                      grade: toLetter(reportValues[4]),
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -129,47 +239,22 @@ class _ReportCardState extends State<ReportCardPage> {
 }
 
 class ReportCardEntry extends StatefulWidget {
-  ReportCardEntry({Key key, this.label, this.score}) : super(key: key);
+  ReportCardEntry({Key key, this.label, this.score, this.onTap})
+      : super(key: key);
   final String label;
   final int score;
+  final Function() onTap;
 
   @override
   _ReportCardEntryState createState() => _ReportCardEntryState();
 }
 
 class _ReportCardEntryState extends State<ReportCardEntry> {
-  String toLetter(int score) {
-    String r = '';
-    int remainder;
-    List<int> scale = [800, 740, 670, 580];
-    if (score > scale[0]) {
-      r = r + 'A';
-      remainder = score - scale[0];
-    } else if (score > scale[1]) {
-      r = r + 'B';
-      remainder = score - scale[1];
-    } else if (score > scale[2]) {
-      r = r + 'C';
-      remainder = score - scale[2];
-    } else if (score > scale[3]) {
-      r = r + 'D';
-      remainder = score - scale[3];
-    } else {
-      return 'F';
-    }
-    if (remainder > 30) {
-      r = r + '+';
-    } else if (remainder < 15) {
-      r = r + '-';
-    } else {
-      r = r + ' ';
-    }
-    return r;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: Container(
         alignment: Alignment.centerLeft,
         height: 60,
         padding: EdgeInsets.all(12),
@@ -192,6 +277,8 @@ class _ReportCardEntryState extends State<ReportCardEntry> {
                   .apply(color: Theme.of(context).canvasColor),
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
