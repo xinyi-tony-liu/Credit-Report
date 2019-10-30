@@ -1,3 +1,5 @@
+import 'package:credit_report/pages/article_feed.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ReportCardPage extends StatefulWidget {
@@ -18,6 +20,25 @@ class _ReportCardState extends State<ReportCardPage> {
               .textTheme
               .title
               .apply(color: Theme.of(context).canvasColor),
+        ),
+        flexibleSpace: SafeArea(
+          child: Stack(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  CupertinoButton(
+                    child: Text("next", style: TextStyle(color: Colors.white),),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ArticleFeedPage()));
+                    },
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
       body: Center(

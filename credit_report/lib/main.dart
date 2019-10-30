@@ -9,9 +9,10 @@ class CreditReport extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        primarySwatch: Colors.orange,
         primaryColor: Colors.orange,
         secondaryHeaderColor: Colors.red,
-        accentColor: Colors.yellow,
+        accentColor: Colors.black,
         canvasColor: Colors.white,
         backgroundColor: Colors.transparent,
       ),

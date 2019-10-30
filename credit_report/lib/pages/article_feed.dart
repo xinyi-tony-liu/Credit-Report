@@ -13,7 +13,7 @@ class _ArticleFeedState extends State<ArticleFeedPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Report Card",
+          "Article Feed",
           style: Theme.of(context)
               .textTheme
               .title
@@ -24,53 +24,9 @@ class _ArticleFeedState extends State<ArticleFeedPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  height: 140,
-                  width: 140,
-                  child: Text(
-                    "Your overall grade",
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor, fontSize: 40),
-                  ),
-                ),
-                Container(
-                  height: 140,
-                  width: 140,
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).canvasColor,
-                      border: Border.all(
-                        color: Theme.of(context).primaryColor,
-                        width: 1,
-                        style: BorderStyle.solid,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(70)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context).primaryColor,
-                          offset: new Offset(20.0, 10.0),
-                          blurRadius: 20.0,
-                        ),
-                      ]),
-                  child: CircleAvatar(
-                    backgroundColor: Theme.of(context).backgroundColor,
-                    child: Text(
-                      "A-",
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor, fontSize: 80),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 60,
-            ),
             ArticleFeedEntry(
               label: "Site A Title",
-              picture: "unavailable.jpg",
+              picture: "images/unavailable.jpg",
               summary: "This is site A",
             ),
             SizedBox(
@@ -78,7 +34,7 @@ class _ArticleFeedState extends State<ArticleFeedPage> {
             ),
             ArticleFeedEntry(
               label: "Site B Title",
-              picture: "unavailable.jpg",
+              picture: "images/unavailable.jpg",
               summary: "This is site B",
             ),
             SizedBox(
@@ -86,7 +42,7 @@ class _ArticleFeedState extends State<ArticleFeedPage> {
             ),
             ArticleFeedEntry(
               label: "Site C Title",
-              picture: "unavailable.jpg",
+              picture: "images/unavailable.jpg",
               summary: "This is site C",
             ),
             SizedBox(
@@ -94,7 +50,7 @@ class _ArticleFeedState extends State<ArticleFeedPage> {
             ),
             ArticleFeedEntry(
               label: "Site D Title",
-              picture: "unavailable.jpg",
+              picture: "images/unavailable.jpg",
               summary: "This is site D",
             ),
             SizedBox(
@@ -102,7 +58,7 @@ class _ArticleFeedState extends State<ArticleFeedPage> {
             ),
             ArticleFeedEntry(
               label: "Site E Title",
-              picture: "unavailable.jpg",
+              picture: "images/unavailable.jpg",
               summary: "This is site E",
             ),
           ],
@@ -128,7 +84,7 @@ class _ArticleFeedEntryState extends State<ArticleFeedEntry> {
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment.centerLeft,
-        height: 60,
+        height: 90,
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
           border: Border.all(
@@ -139,20 +95,25 @@ class _ArticleFeedEntryState extends State<ArticleFeedEntry> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text(
-              widget.label,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline
-                  .apply(color: Theme.of(context).canvasColor),
+            Column(
+              children: <Widget>[
+                Text(
+                  widget.label,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline
+                      .apply(color: Theme.of(context).accentColor),
+                ),
+                Text(
+                  widget.summary,
+                  style: Theme.of(context)
+                      .textTheme
+                      .body2
+                      .apply(color: Theme.of(context).accentColor),
+                ),
+              ],
             ),
-            Text(
-              widget.summary,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline
-                  .apply(color: Theme.of(context).canvasColor),
-            ),
+            Image.asset(widget.picture),
           ],
         ));
   }
