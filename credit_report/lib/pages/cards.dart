@@ -3,6 +3,23 @@ import 'package:credit_report/pages/detailed_report.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart' as prefix0;
+
+class Debt {
+  String name;
+  double balance;
+  double paid;
+
+  Debt(this.name, this.balance, this.paid);
+}
+
+class Card {
+  String name;
+  double balance;
+  String image;
+
+  Card(this.name, this.balance, this.image);
+}
 
 class CardsPage extends StatefulWidget {
   CardsPage({Key key}) : super(key: key);
@@ -12,21 +29,20 @@ class CardsPage extends StatefulWidget {
 }
 
 class _CardsState extends State<CardsPage> {
-  List<String> reportCategory = [
-    "Payment History",
-    "Credit Limit Utilization",
-    "Length of Debt",
-    "Value of Debt",
-    "Credit Entries",
+  // THIS IS TEMP
+  List<Card> cards = [
+    Card("TD Visa", -270.40, "images/unavailable.jpg"),
+    Card("Mastercard Platinum", 41.32, "images/unavailable.jpg"),
+    Card("American Express Centurian Card", 837.75, "images/unavailable.jpg"),
   ];
 
-// THIS IS TEMP
-  List<int> reportValues = [
-    730,
-    840,
-    790,
-    750,
-    700,
+  List<Debt> loans = [
+    Debt("OSAP 2017", 20000, 18000),
+    Debt("OSAP 2018", 8241.32, 0),
+  ];
+
+  List<Debt> mortgages = [
+    Debt("470 Park Ave.", 317000, 150000),
   ];
 
   @override
@@ -44,20 +60,7 @@ class _CardsState extends State<CardsPage> {
           child: Stack(
             children: <Widget>[
               Row(
-                children: <Widget>[
-                  CupertinoButton(
-                    child: Text(
-                      "next",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ArticleFeedPage()));
-                    },
-                  ),
-                ],
+                children: <Widget>[],
               )
             ],
           ),
@@ -67,61 +70,68 @@ class _CardsState extends State<CardsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 12),
+                child: Text(
+                  "My Cards",
+                  style: Theme.of(context).textTheme.headline,
+                ),
+              ),
+            ),
             CarouselSlider(
-              height: 200.0,
-              items: [1, 2, 3, 4, 5].map((i) {
+              height: 250,
+              items: [0, 1, 2].map((i) {
                 return Builder(
                   builder: (BuildContext context) {
-                    return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(color: Colors.amber),
-                        child: Text(
-                          'text $i',
-                          style: TextStyle(fontSize: 16.0),
-                        ));
+                    return CreditCard(
+                      card: cards[i],
+                    );
                   },
                 );
               }).toList(),
             ),
-            SizedBox(
-              height: 12,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 12),
+                child: Text(
+                  "My Loans",
+                  style: Theme.of(context).textTheme.headline,
+                ),
+              ),
             ),
             CarouselSlider(
               height: 100.0,
-              items: [1, 2, 3, 4, 5].map((i) {
+              items: [0, 1].map((i) {
                 return Builder(
                   builder: (BuildContext context) {
-                    return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(color: Colors.amber),
-                        child: Text(
-                          'text $i',
-                          style: TextStyle(fontSize: 16.0),
-                        ));
+                    return Loans(
+                      loan: loans[i],
+                    );
                   },
                 );
               }).toList(),
             ),
-            SizedBox(
-              height: 12,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 12),
+                child: Text(
+                  "My Mortgages",
+                  style: Theme.of(context).textTheme.headline,
+                ),
+              ),
             ),
             CarouselSlider(
               height: 80.0,
-              items: [1, 2, 3, 4, 5].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(color: Colors.amber),
-                        child: Text(
-                          'text $i',
-                          style: TextStyle(fontSize: 16.0),
-                        ));
-                  },
-                );
+              items: [0].map((i) {
+                return Builder(builder: (BuildContext context) {
+                  return Mortgages(
+                    mortgage: mortgages[i],
+                  );
+                });
               }).toList(),
             ),
           ],
@@ -131,38 +141,133 @@ class _CardsState extends State<CardsPage> {
   }
 }
 
-class CardsEntry extends StatefulWidget {
-  CardsEntry({Key key, this.label, this.score, this.onTap}) : super(key: key);
-  final String label;
-  final int score;
-  final Function() onTap;
+class CreditCard extends StatefulWidget {
+  CreditCard({Key key, this.card}) : super(key: key);
+  final Card card;
 
   @override
-  _CardsEntryState createState() => _CardsEntryState();
+  _CreditCardState createState() => _CreditCardState();
 }
 
-class _CardsEntryState extends State<CardsEntry> {
+class _CreditCardState extends State<CreditCard> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onTap,
-      child: Container(
-        alignment: Alignment.centerLeft,
-        height: 60,
-        padding: EdgeInsets.all(12),
-        color: Theme.of(context).primaryColor,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              widget.label,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline
-                  .apply(color: Theme.of(context).canvasColor),
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.all(12),
+      color: Theme.of(context).canvasColor,
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: 200.0,
+            height: 125.0,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(widget.card.image), fit: BoxFit.fill),
             ),
-          ],
-        ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 12),
+              child: Text(
+                widget.card.name,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline
+                    .apply(color: Theme.of(context).accentColor),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 12),
+              child: Text(
+                widget.card.balance.toString(),
+                style: Theme.of(context)
+                    .textTheme
+                    .body1
+                    .apply(color: Theme.of(context).accentColor),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Loans extends StatefulWidget {
+  Loans({Key key, this.loan}) : super(key: key);
+  final Debt loan;
+
+  @override
+  _LoansState createState() => _LoansState();
+}
+
+class _LoansState extends State<Loans> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.all(12),
+      color: Theme.of(context).canvasColor,
+      child: Column(
+        children: <Widget>[
+          Text(
+            widget.loan.name,
+            style: Theme.of(context)
+                .textTheme
+                .headline
+                .apply(color: Theme.of(context).accentColor),
+          ),
+          Text(
+            widget.loan.balance.toString(),
+            style: Theme.of(context)
+                .textTheme
+                .body1
+                .apply(color: Theme.of(context).accentColor),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Mortgages extends StatefulWidget {
+  Mortgages({Key key, this.mortgage}) : super(key: key);
+  final Debt mortgage;
+
+  @override
+  _MortgagesState createState() => _MortgagesState();
+}
+
+class _MortgagesState extends State<Mortgages> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.all(12),
+      color: Theme.of(context).canvasColor,
+      child: Column(
+        children: <Widget>[
+          Text(
+            widget.mortgage.name,
+            style: Theme.of(context)
+                .textTheme
+                .headline
+                .apply(color: Theme.of(context).accentColor),
+          ),
+          Text(
+            widget.mortgage.balance.toString(),
+            style: Theme.of(context)
+                .textTheme
+                .body1
+                .apply(color: Theme.of(context).accentColor),
+          ),
+        ],
       ),
     );
   }
