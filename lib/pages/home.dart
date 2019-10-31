@@ -1,5 +1,6 @@
 import 'package:credit_report/pages/article_feed.dart';
 import 'package:credit_report/pages/cards.dart';
+import 'package:credit_report/pages/profile.dart';
 import 'package:credit_report/pages/recommended.dart';
 import 'package:credit_report/pages/report_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +20,7 @@ class _HomeState extends State<HomePage> {
     ReportCardPage(),
     ArticleFeedPage(),
     RecommendedPage(),
-    CardsPage(),
+    ProfilePage(),
   ];
 
   @override
