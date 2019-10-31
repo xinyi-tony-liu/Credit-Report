@@ -1,7 +1,7 @@
 import 'package:credit_report/pages/article_view.dart';
 import 'package:flutter/material.dart';
 
-class ArticleInfo{
+class ArticleInfo {
   String title;
   String image;
   String summary;
@@ -18,12 +18,16 @@ class ArticleFeedPage extends StatefulWidget {
 
 class _ArticleFeedState extends State<ArticleFeedPage> {
   //Temp
-  final List<ArticleInfo> _articles =[
-    ArticleInfo("Site A Title", "images/unavailable.jpg", "This is site A"),
-        ArticleInfo("Site B Title", "images/unavailable.jpg", "This is site B"),
-    ArticleInfo("Site C Title", "images/unavailable.jpg", "This is site C"),
-    ArticleInfo("Site D Title", "images/unavailable.jpg", "This is site D"),
-    ArticleInfo("Site E Title", "images/unavailable.jpg", "This is site E"),
+  final List<ArticleInfo> _articles = [
+    ArticleInfo(
+        "Cloudy Today", "images/article1.png", "Clouds Helping Credit Scores"),
+    ArticleInfo("City Central", "images/article2.jpg", "Credit in the City"),
+    ArticleInfo("The Cattle Farm", "images/article3.jpg",
+        "COW-culate Your Credit Today"),
+    ArticleInfo(
+        "The Myths", "images/article4.jpg", "The Myths of Credit Scores"),
+    ArticleInfo("Ficton Faction", "images/article5.jpeg",
+        "Be in Control of Your Credit"),
   ];
 
   @override
@@ -33,7 +37,7 @@ class _ArticleFeedState extends State<ArticleFeedPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           ArticleFeedEntry(
-           article: _articles[0],
+            article: _articles[0],
           ),
           SizedBox(
             height: 15,
@@ -45,7 +49,7 @@ class _ArticleFeedState extends State<ArticleFeedPage> {
             height: 15,
           ),
           ArticleFeedEntry(
-           article: _articles[2],
+            article: _articles[2],
           ),
           SizedBox(
             height: 15,
@@ -66,8 +70,7 @@ class _ArticleFeedState extends State<ArticleFeedPage> {
 }
 
 class ArticleFeedEntry extends StatefulWidget {
-  ArticleFeedEntry({Key key, this.article})
-      : super(key: key);
+  ArticleFeedEntry({Key key, this.article}) : super(key: key);
   final ArticleInfo article;
 
   @override
@@ -79,13 +82,16 @@ class _ArticleFeedEntryState extends State<ArticleFeedEntry> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => ArticleViewPage(
-                    title: widget.article.title,
-                    image: widget.article.image,
-                    summary: widget.article.summary,
-                  ),
-                ),);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ArticleViewPage(
+              title: widget.article.title,
+              image: widget.article.image,
+              summary: widget.article.summary,
+            ),
+          ),
+        );
       },
       child: Container(
         alignment: Alignment.centerLeft,
@@ -101,6 +107,7 @@ class _ArticleFeedEntryState extends State<ArticleFeedEntry> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   widget.article.title,
@@ -113,7 +120,7 @@ class _ArticleFeedEntryState extends State<ArticleFeedEntry> {
                   widget.article.summary,
                   style: Theme.of(context)
                       .textTheme
-                      .body2
+                      .body1
                       .apply(color: Theme.of(context).accentColor),
                 ),
               ],

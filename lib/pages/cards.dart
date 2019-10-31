@@ -4,10 +4,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class Debt {
   String name;
-  double balance;
+  double total;
   double paid;
 
-  Debt(this.name, this.balance, this.paid);
+  Debt(this.name, this.total, this.paid);
 }
 
 class Card {
@@ -59,7 +59,7 @@ class _CardsState extends State<CardsPage> {
             ),
           ),
           CarouselSlider(
-            height: 250,
+            height: 230,
             items: [0, 1, 2].map((i) {
               return Builder(
                 builder: (BuildContext context) {
@@ -81,7 +81,7 @@ class _CardsState extends State<CardsPage> {
             ),
           ),
           CarouselSlider(
-            height: 100.0,
+            height: 100,
             items: [0, 1].map((i) {
               return Builder(
                 builder: (BuildContext context) {
@@ -103,7 +103,7 @@ class _CardsState extends State<CardsPage> {
             ),
           ),
           CarouselSlider(
-            height: 80.0,
+            height: 100.0,
             items: [0].map((i) {
               return Builder(builder: (BuildContext context) {
                 return Mortgages(
@@ -162,7 +162,7 @@ class _CreditCardState extends State<CreditCard> {
             child: Padding(
               padding: EdgeInsets.only(left: 12),
               child: Text(
-                widget.card.balance.toString(),
+                "\$" + widget.card.balance.toString(),
                 style: Theme.of(context)
                     .textTheme
                     .body1
@@ -200,8 +200,35 @@ class _LoansState extends State<Loans> {
                 .headline
                 .apply(color: Theme.of(context).accentColor),
           ),
+          Container(
+            alignment: Alignment.centerLeft,
+            decoration: BoxDecoration(
+              border:
+                  Border.all(color: Theme.of(context).primaryColor, width: 0.5),
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  stops: [
+                    0.0,
+                    widget.loan.paid / widget.loan.total - 0.01,
+                    widget.loan.paid / widget.loan.total,
+                    1.0
+                  ],
+                  colors: [
+                    Theme.of(context).primaryColor,
+                    Theme.of(context).primaryColor,
+                    Theme.of(context).canvasColor,
+                    Theme.of(context).canvasColor
+                  ]),
+            ),
+            height: 20,
+            padding: EdgeInsets.all(12),
+          ),
           Text(
-            widget.loan.balance.toString(),
+            "\$" +
+                widget.loan.paid.toString() +
+                " of \$" +
+                widget.loan.total.toString(),
             style: Theme.of(context)
                 .textTheme
                 .body1
@@ -237,8 +264,35 @@ class _MortgagesState extends State<Mortgages> {
                 .headline
                 .apply(color: Theme.of(context).accentColor),
           ),
+          Container(
+            alignment: Alignment.centerLeft,
+            decoration: BoxDecoration(
+              border:
+                  Border.all(color: Theme.of(context).primaryColor, width: 0.5),
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  stops: [
+                    0.0,
+                    widget.mortgage.paid / widget.mortgage.total - 0.01,
+                    widget.mortgage.paid / widget.mortgage.total,
+                    1.0
+                  ],
+                  colors: [
+                    Theme.of(context).primaryColor,
+                    Theme.of(context).primaryColor,
+                    Theme.of(context).canvasColor,
+                    Theme.of(context).canvasColor
+                  ]),
+            ),
+            height: 20,
+            padding: EdgeInsets.all(12),
+          ),
           Text(
-            widget.mortgage.balance.toString(),
+            "\$" +
+                widget.mortgage.paid.toString() +
+                " of \$" +
+                widget.mortgage.total.toString(),
             style: Theme.of(context)
                 .textTheme
                 .body1
