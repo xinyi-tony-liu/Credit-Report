@@ -1,9 +1,6 @@
-import 'package:credit_report/pages/article_feed.dart';
-import 'package:credit_report/pages/detailed_report.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart' as prefix0;
 
 class Debt {
   String name;
@@ -47,95 +44,75 @@ class _CardsState extends State<CardsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Report Card",
-          style: Theme.of(context)
-              .textTheme
-              .title
-              .apply(color: Theme.of(context).canvasColor),
-        ),
-        flexibleSpace: SafeArea(
-          child: Stack(
-            children: <Widget>[
-              Row(
-                children: <Widget>[],
-              )
-            ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 12),
+              child: Text(
+                "My Cards",
+                style: Theme.of(context).textTheme.headline,
+              ),
+            ),
           ),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 12),
-                child: Text(
-                  "My Cards",
-                  style: Theme.of(context).textTheme.headline,
-                ),
-              ),
-            ),
-            CarouselSlider(
-              height: 250,
-              items: [0, 1, 2].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return CreditCard(
-                      card: cards[i],
-                    );
-                  },
-                );
-              }).toList(),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 12),
-                child: Text(
-                  "My Loans",
-                  style: Theme.of(context).textTheme.headline,
-                ),
-              ),
-            ),
-            CarouselSlider(
-              height: 100.0,
-              items: [0, 1].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Loans(
-                      loan: loans[i],
-                    );
-                  },
-                );
-              }).toList(),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 12),
-                child: Text(
-                  "My Mortgages",
-                  style: Theme.of(context).textTheme.headline,
-                ),
-              ),
-            ),
-            CarouselSlider(
-              height: 80.0,
-              items: [0].map((i) {
-                return Builder(builder: (BuildContext context) {
-                  return Mortgages(
-                    mortgage: mortgages[i],
+          CarouselSlider(
+            height: 250,
+            items: [0, 1, 2].map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return CreditCard(
+                    card: cards[i],
                   );
-                });
-              }).toList(),
+                },
+              );
+            }).toList(),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 12),
+              child: Text(
+                "My Loans",
+                style: Theme.of(context).textTheme.headline,
+              ),
             ),
-          ],
-        ),
+          ),
+          CarouselSlider(
+            height: 100.0,
+            items: [0, 1].map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Loans(
+                    loan: loans[i],
+                  );
+                },
+              );
+            }).toList(),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 12),
+              child: Text(
+                "My Mortgages",
+                style: Theme.of(context).textTheme.headline,
+              ),
+            ),
+          ),
+          CarouselSlider(
+            height: 80.0,
+            items: [0].map((i) {
+              return Builder(builder: (BuildContext context) {
+                return Mortgages(
+                  mortgage: mortgages[i],
+                );
+              });
+            }).toList(),
+          ),
+        ],
       ),
     );
   }

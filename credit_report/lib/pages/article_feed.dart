@@ -1,4 +1,13 @@
+import 'package:credit_report/pages/article_view.dart';
 import 'package:flutter/material.dart';
+
+class ArticleInfo{
+  String title;
+  String image;
+  String summary;
+
+  ArticleInfo(this.title, this.image, this.summary);
+}
 
 class ArticleFeedPage extends StatefulWidget {
   ArticleFeedPage({Key key}) : super(key: key);
@@ -8,72 +17,58 @@ class ArticleFeedPage extends StatefulWidget {
 }
 
 class _ArticleFeedState extends State<ArticleFeedPage> {
+  //Temp
+  final List<ArticleInfo> _articles =[
+    ArticleInfo("Site A Title", "images/unavailable.jpg", "This is site A"),
+        ArticleInfo("Site B Title", "images/unavailable.jpg", "This is site B"),
+    ArticleInfo("Site C Title", "images/unavailable.jpg", "This is site C"),
+    ArticleInfo("Site D Title", "images/unavailable.jpg", "This is site D"),
+    ArticleInfo("Site E Title", "images/unavailable.jpg", "This is site E"),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Article Feed",
-          style: Theme.of(context)
-              .textTheme
-              .title
-              .apply(color: Theme.of(context).canvasColor),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ArticleFeedEntry(
-              label: "Site A Title",
-              picture: "images/unavailable.jpg",
-              summary: "This is site A",
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            ArticleFeedEntry(
-              label: "Site B Title",
-              picture: "images/unavailable.jpg",
-              summary: "This is site B",
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            ArticleFeedEntry(
-              label: "Site C Title",
-              picture: "images/unavailable.jpg",
-              summary: "This is site C",
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            ArticleFeedEntry(
-              label: "Site D Title",
-              picture: "images/unavailable.jpg",
-              summary: "This is site D",
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            ArticleFeedEntry(
-              label: "Site E Title",
-              picture: "images/unavailable.jpg",
-              summary: "This is site E",
-            ),
-          ],
-        ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          ArticleFeedEntry(
+           article: _articles[0],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          ArticleFeedEntry(
+            article: _articles[1],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          ArticleFeedEntry(
+           article: _articles[2],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          ArticleFeedEntry(
+            article: _articles[3],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          ArticleFeedEntry(
+            article: _articles[4],
+          ),
+        ],
       ),
     );
   }
 }
 
 class ArticleFeedEntry extends StatefulWidget {
-  ArticleFeedEntry({Key key, this.label, this.picture, this.summary})
+  ArticleFeedEntry({Key key, this.article})
       : super(key: key);
-  final String label;
-  final String picture;
-  final String summary;
+  final ArticleInfo article;
 
   @override
   _ArticleFeedEntryState createState() => _ArticleFeedEntryState();
@@ -82,7 +77,17 @@ class ArticleFeedEntry extends StatefulWidget {
 class _ArticleFeedEntryState extends State<ArticleFeedEntry> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => ArticleViewPage(
+                    title: widget.article.title,
+                    image: widget.article.image,
+                    summary: widget.article.summary,
+                  ),
+                ),);
+      },
+      child: Container(
         alignment: Alignment.centerLeft,
         height: 90,
         padding: EdgeInsets.all(12),
@@ -98,14 +103,14 @@ class _ArticleFeedEntryState extends State<ArticleFeedEntry> {
             Column(
               children: <Widget>[
                 Text(
-                  widget.label,
+                  widget.article.title,
                   style: Theme.of(context)
                       .textTheme
                       .headline
                       .apply(color: Theme.of(context).accentColor),
                 ),
                 Text(
-                  widget.summary,
+                  widget.article.summary,
                   style: Theme.of(context)
                       .textTheme
                       .body2
@@ -113,8 +118,10 @@ class _ArticleFeedEntryState extends State<ArticleFeedEntry> {
                 ),
               ],
             ),
-            Image.asset(widget.picture),
+            Image.asset(widget.article.image),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

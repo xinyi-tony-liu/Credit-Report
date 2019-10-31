@@ -1,5 +1,3 @@
-import 'package:credit_report/pages/article_feed.dart';
-import 'package:credit_report/pages/cards.dart';
 import 'package:credit_report/pages/detailed_report.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -60,180 +58,147 @@ class _ReportCardState extends State<ReportCardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Report Card",
-          style: Theme.of(context)
-              .textTheme
-              .title
-              .apply(color: Theme.of(context).canvasColor),
-        ),
-        flexibleSpace: SafeArea(
-          child: Stack(
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  CupertinoButton(
-                    child: Text(
-                      "next",
-                      style: TextStyle(color: Colors.white),
+              Container(
+                height: 100,
+                width: 100,
+                child: Text(
+                  "Your overall grade",
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontSize: 27),
+                ),
+              ),
+              Container(
+                height: 120,
+                width: 120,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).canvasColor,
+                    border: Border.all(
+                      color: Theme.of(context).primaryColor,
+                      width: 1,
+                      style: BorderStyle.solid,
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CardsPage()));
-                    },
+                    borderRadius: BorderRadius.all(Radius.circular(60)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Theme.of(context).primaryColor,
+                        offset: new Offset(20.0, 10.0),
+                        blurRadius: 20.0,
+                      ),
+                    ]),
+                child: CircleAvatar(
+                  backgroundColor: Theme.of(context).backgroundColor,
+                  child: Text(
+                    "A-",
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor, fontSize: 65),
                   ),
-                ],
-              )
+                ),
+              ),
             ],
           ),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  height: 140,
-                  width: 140,
-                  child: Text(
-                    "Your overall grade",
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor, fontSize: 37),
+          SizedBox(
+            height: 40,
+          ),
+          ReportCardEntry(
+            label: reportCategory[0],
+            score: reportValues[0],
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailedReportPage(
+                    title: reportCategory[0],
+                    score: reportValues[0],
+                    grade: toLetter(reportValues[0]),
                   ),
                 ),
-                Container(
-                  height: 140,
-                  width: 140,
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).canvasColor,
-                      border: Border.all(
-                        color: Theme.of(context).primaryColor,
-                        width: 1,
-                        style: BorderStyle.solid,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(70)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context).primaryColor,
-                          offset: new Offset(20.0, 10.0),
-                          blurRadius: 20.0,
-                        ),
-                      ]),
-                  child: CircleAvatar(
-                    backgroundColor: Theme.of(context).backgroundColor,
-                    child: Text(
-                      "A-",
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor, fontSize: 80),
-                    ),
+              );
+            },
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          ReportCardEntry(
+            label: reportCategory[1],
+            score: reportValues[1],
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailedReportPage(
+                    title: reportCategory[1],
+                    score: reportValues[1],
+                    grade: toLetter(reportValues[1]),
                   ),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            ReportCardEntry(
-              label: reportCategory[0],
-              score: reportValues[0],
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailedReportPage(
-                      title: reportCategory[0],
-                      score: reportValues[0],
-                      grade: toLetter(reportValues[0]),
-                    ),
+              );
+            },
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          ReportCardEntry(
+            label: reportCategory[2],
+            score: reportValues[2],
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailedReportPage(
+                    title: reportCategory[2],
+                    score: reportValues[2],
+                    grade: toLetter(reportValues[2]),
                   ),
-                );
-              },
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            ReportCardEntry(
-              label: reportCategory[1],
-              score: reportValues[1],
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailedReportPage(
-                      title: reportCategory[1],
-                      score: reportValues[1],
-                      grade: toLetter(reportValues[1]),
-                    ),
+                ),
+              );
+            },
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          ReportCardEntry(
+            label: reportCategory[3],
+            score: reportValues[3],
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailedReportPage(
+                    title: reportCategory[3],
+                    score: reportValues[3],
+                    grade: toLetter(reportValues[3]),
                   ),
-                );
-              },
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            ReportCardEntry(
-              label: reportCategory[2],
-              score: reportValues[2],
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailedReportPage(
-                      title: reportCategory[2],
-                      score: reportValues[2],
-                      grade: toLetter(reportValues[2]),
-                    ),
+                ),
+              );
+            },
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          ReportCardEntry(
+            label: reportCategory[4],
+            score: reportValues[4],
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailedReportPage(
+                    title: reportCategory[4],
+                    score: reportValues[4],
+                    grade: toLetter(reportValues[4]),
                   ),
-                );
-              },
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            ReportCardEntry(
-              label: reportCategory[3],
-              score: reportValues[3],
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailedReportPage(
-                      title: reportCategory[3],
-                      score: reportValues[3],
-                      grade: toLetter(reportValues[3]),
-                    ),
-                  ),
-                );
-              },
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            ReportCardEntry(
-              label: reportCategory[4],
-              score: reportValues[4],
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailedReportPage(
-                      title: reportCategory[4],
-                      score: reportValues[4],
-                      grade: toLetter(reportValues[4]),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
@@ -257,11 +222,24 @@ class _ReportCardEntryState extends State<ReportCardEntry> {
       onTap: widget.onTap,
       child: Container(
         alignment: Alignment.centerLeft,
-        decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      stops: [0.0, widget.score / 850 - 0.01, widget.score / 850 ,1.0],
-                      colors: [Colors.red, Colors.red, Colors.orange, Colors.orange]),),
-        height: 60,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              stops: [
+                0.0,
+                widget.score / 850 - 0.01,
+                widget.score / 850,
+                1.0
+              ],
+              colors: [
+                Theme.of(context).primaryColor,
+                Theme.of(context).primaryColor,
+                Theme.of(context).secondaryHeaderColor,
+                Theme.of(context).secondaryHeaderColor
+              ]),
+        ),
+        height: 55,
         padding: EdgeInsets.all(12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
