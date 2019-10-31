@@ -257,9 +257,12 @@ class _ReportCardEntryState extends State<ReportCardEntry> {
       onTap: widget.onTap,
       child: Container(
         alignment: Alignment.centerLeft,
+        decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      stops: [0.0, widget.score / 850 - 0.01, widget.score / 850 ,1.0],
+                      colors: [Colors.red, Colors.red, Colors.orange, Colors.orange]),),
         height: 60,
         padding: EdgeInsets.all(12),
-        color: Theme.of(context).primaryColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
